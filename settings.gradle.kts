@@ -2,25 +2,24 @@
 
 pluginManagement {
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
 }
-include(
-    ":mobile",
-    ":wear",
-    ":tv",
-    ":auto",
-    ":xr",
-    ":core"
-)
-rootProject.name = "android-template" // todo Replace with your own app’s name
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+rootProject.name = "Aliases"
+include(":app")
