@@ -37,12 +37,6 @@ android {
         versionName = "1.0.0"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-    }
-
     buildFeatures {
         compose = true
     }
