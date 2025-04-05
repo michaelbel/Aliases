@@ -33,7 +33,7 @@ fun IconBox(
                 color = if (isEnabled) MaterialTheme.colorScheme.tertiaryContainer else Color.Transparent,
                 shape = MaterialTheme.shapes.large
             )
-            .clickable { onClick() },
+            .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Icon(
