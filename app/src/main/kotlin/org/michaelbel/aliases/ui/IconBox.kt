@@ -30,7 +30,7 @@ fun IconBox(
             .clip(MaterialTheme.shapes.large)
             .border(
                 width = 1.dp,
-                color = if (isEnabled) MaterialTheme.colorScheme.tertiaryContainer else Color.Transparent,
+                color = if (isEnabled) MaterialTheme.colorScheme.primary else Color.Transparent,
                 shape = MaterialTheme.shapes.large
             )
             .clickable(onClick = onClick),
