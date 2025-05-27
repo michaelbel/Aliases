@@ -54,14 +54,5 @@ dependencies {
     api(libs.androidx.core.splashscreen)
 }
 
-tasks.register("printVersionName") {
-    doLast {
-        println(android.defaultConfig.versionName)
-    }
-}
-
-tasks.register("printVersionCode") {
-    doLast {
-        println(android.defaultConfig.versionCode.toString())
-    }
-}
+tasks.register("printVersionName") { doLast { println(android.defaultConfig.versionName) } }
+tasks.register("printVersionCode") { doLast { println(android.defaultConfig.versionCode.toString()) } }
