@@ -14,7 +14,7 @@
             android:name=".MainActivity" />
 
         <activity-alias
-            android:name="org.michaelbel.aliases.DEFAULT"
+            android:name=".DEFAULT"
             android:enabled="true"
             android:exported="true"
             android:icon="@drawable/ic_launcher"
@@ -29,7 +29,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="org.michaelbel.aliases.PREMIUM"
+            android:name=".PREMIUM"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_launcher_premium"
@@ -44,7 +44,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="org.michaelbel.aliases.XMAS"
+            android:name=".XMAS"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/ic_launcher_xmas"

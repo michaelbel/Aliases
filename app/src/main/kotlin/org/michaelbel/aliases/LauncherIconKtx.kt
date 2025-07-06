@@ -9,7 +9,7 @@ import android.content.pm.PackageManager
  * @return true, если иконка включена.
  */
 fun Context.isEnabled(icon: LauncherIcon): Boolean {
-    val componentName = ComponentName(/* pkg */ packageName, /* cls */ "org.michaelbel.aliases.${icon.name}")
+    val componentName = ComponentName(/* pkg */ packageName, /* cls */ "$packageName.${icon.name}")
     val componentEnabledSetting = packageManager.getComponentEnabledSetting(componentName)
     return componentEnabledSetting == PackageManager.COMPONENT_ENABLED_STATE_ENABLED || componentEnabledSetting == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && icon == LauncherIcon.DEFAULT
 }
@@ -19,7 +19,7 @@ fun Context.isEnabled(icon: LauncherIcon): Boolean {
  */
 fun Context.setEnabled(enabledIcon: LauncherIcon) {
     LauncherIcon.entries.forEach { icon ->
-        val componentName = ComponentName(/* pkg */ packageName, /* cls */ "org.michaelbel.aliases.${icon.name}")
+        val componentName = ComponentName(/* pkg */ packageName, /* cls */ "$packageName.${icon.name}")
         packageManager.setComponentEnabledSetting(
             /* componentName */ componentName,
             /* newState */ if (icon == enabledIcon) PackageManager.COMPONENT_ENABLED_STATE_ENABLED else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
