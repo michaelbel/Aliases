@@ -65,7 +65,8 @@ jobs:
           retention-days: 1
 
       - name: expose debug apk path
-        run: latest=$(ls -t app/build/outputs/apk/*.apk | head -1); echo "APK_PATH=$latest" >> $GITHUB_ENV
+        run: |
+          echo "APK_PATH=$(find app/build/outputs/apk -name '*.apk' -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2)" >> $GITHUB_ENV
 
       - name: send telegram message
         env:
