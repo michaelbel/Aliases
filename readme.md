@@ -3,8 +3,8 @@
 </div>
 
 [![](https://img.shields.io/badge/Пост_в_Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/foundout)
-[![](https://img.shields.io/badge/Пост_на_Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=F6F6F6)](https://boosty.to/michaelbel)
-[![](https://img.shields.io/badge/Видео_на_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@michaelbely)
+[![](https://img.shields.io/badge/Пост_на_Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=F6F6F6)](https://boosty.to/michaelbel/posts/ff038b7f-d39c-49fd-9dc4-b1d10c562f37)
+[![](https://img.shields.io/badge/Видео_на_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/vZpKpJ2f6ng)
 
 
 Aliases
