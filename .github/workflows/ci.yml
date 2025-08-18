@@ -91,11 +91,9 @@ jobs:
             <b>Branch:</b> <code>${{ github.ref_name }}</code>
             <b>Commit:</b> <code>${{ env.SHORT_SHA }}</code>
         run: |
-          set -euo pipefail
-          test -f "$APK_PATH" && ls -lh "$APK_PATH"
-          curl -sS -f -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
-            -F "chat_id=${CHAT_ID}" \
-            -F "document=@${APK_PATH};type=application/vnd.android.package-archive" \
-            -F "caption=${MESSAGE}" \
-            -F "message_thread_id=${THREAD_ID}" \
-            -F "parse_mode=HTML"
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
+            -F chat_id="${CHAT_ID}" \
+            -F document="@${{ env.APK_PATH }}" \
+            -F caption="${{ env.MESSAGE }}" \
+            -F message_thread_id="${THREAD_ID}" \
+            -F parse_mode="HTML"
