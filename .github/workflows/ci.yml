@@ -11,7 +11,7 @@ on:
 
 concurrency:
   group: environment-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   job-common:
@@ -32,6 +32,8 @@ jobs:
     timeout-minutes: 60
     env:
       SHORT_SHA: ${{ needs.job-common.outputs.SHORT_SHA }}
+      VERSION_NAME: ${{ steps.version.outputs.VERSION_NAME }}
+      VERSION_CODE: ${{ steps.version.outputs.VERSION_CODE }}
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
@@ -43,51 +45,26 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: gradle
 
-      - name: cache gradle dependencies
-        uses: actions/cache@v4
+      - name: expose version
+        id: version
+        run: ./gradlew -q printVersion | tee -a $GITHUB_ENV | tee -a $GITHUB_OUTPUT
+
+      - uses: gradle/actions/setup-gradle@v4
         with:
-          path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}-
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+          cache-write: true
 
-      - name: cache gradle wrapper
-        uses: actions/cache@v3
+      - run: ./gradlew assembleDebug
+
+      - uses: actions/upload-artifact@v4
         with:
-          path: ~/.gradle/wrapper
-          key: gradle-wrapper-${{ runner.os }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+          path: app/build/outputs/apk
+          retention-days: 1
 
-      - name: clean outputs directory
-        run: rm -rf app/build/outputs/*
-
-      - name: make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: assemble debug artifact
-        run: ./gradlew assembleDebug
-
-      - name: upload artifacts to outputs
-        uses: actions/upload-artifact@v4
-        with:
-          path: |
-            app/build/outputs/apk
-
-      - name: expose version name
-        id: version_name
-        run: |
-          VERSION_NAME=$(./gradlew printVersionName -q)
-          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
-
-      - name: expose version code
-        id: version_code
-        run: |
-          VERSION_CODE=$(./gradlew printVersionCode -q)
-          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
-
-      - name: expose apk path
-        run: |
-          echo "APK_PATH=$(find app/build/outputs/apk -name '*.apk' -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2)" >> $GITHUB_ENV
+      - name: expose debug apk path
+        run: latest=$(ls -t app/build/outputs/apk/*.apk | head -1); echo "APK_PATH=$latest" >> $GITHUB_ENV    
 
       - name: send telegram message
         env:
