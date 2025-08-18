@@ -1,10 +1,7 @@
 .kotlin
-
 .gradle
 build
 build-cache
 generated
-
 .idea
-
 local.properties
