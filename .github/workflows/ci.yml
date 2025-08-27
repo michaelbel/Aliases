@@ -88,8 +88,8 @@ jobs:
           THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
           MESSAGE: |
             ✅ <b>${{ env.VERSION_NAME }} (${{ env.VERSION_CODE }})</b>
-            <b>Repo:</b> https://github.com/michaelbel/aliases
-            <b>Branch:</b> <code>${{ github.ref_name }}</code>
+            <b>Repo:</b> <a href="${{ github.server_url }}/${{ github.repository }}">${{ github.repository }}</a>
+            <b>Branch:</b> <a href="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}">${{ github.ref_name }}</a>
             <b>Commit:</b> <a href="${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}">${{ env.SHORT_SHA }}</a>
         run: |
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
