@@ -29,7 +29,6 @@ jobs:
   build-android:
     needs: job-common
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
     env:
       SHORT_SHA: ${{ needs.job-common.outputs.SHORT_SHA }}
     steps:
@@ -87,14 +86,14 @@ jobs:
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
           MESSAGE: |
-            ✅ <b>${{ env.VERSION_NAME }} (${{ env.VERSION_CODE }})</b>
-            <b>Repo:</b> <a href="${{ github.server_url }}/${{ github.repository }}">${{ github.repository }}</a>
-            <b>Branch:</b> <a href="${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}">${{ github.ref_name }}</a>
-            <b>Commit:</b> <a href="${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}">${{ env.SHORT_SHA }}</a>
+            ✅ *${{ env.VERSION_NAME }} (${{ env.VERSION_CODE }})*
+            *Repo:* https://github.com/${{ github.repository }}
+            *Branch:* [${{ github.ref_name }}](${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }})
+            *Commit:* [${{ env.SHORT_SHA }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
         run: |
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
             -F chat_id="${CHAT_ID}" \
             -F document="@${{ env.APK_PATH }}" \
             -F caption="${{ env.MESSAGE }}" \
             -F message_thread_id="${THREAD_ID}" \
-            -F parse_mode="HTML"
+            -F parse_mode="Markdown"
