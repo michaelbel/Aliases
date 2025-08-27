@@ -89,7 +89,7 @@ jobs:
           MESSAGE: |
             ✅ <b>${{ env.VERSION_NAME }} (${{ env.VERSION_CODE }})</b>
             <b>Branch:</b> <code>${{ github.ref_name }}</code>
-            <b>Commit:</b> <code>${{ env.SHORT_SHA }}</code>
+            <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"><code>${{ env.SHORT_SHA }}</code></a>
         run: |
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument" \
             -F chat_id="${CHAT_ID}" \
