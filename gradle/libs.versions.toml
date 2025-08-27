@@ -1,5 +1,5 @@
 [versions]
-min-sdk = "26"
+min-sdk = "31"
 compile-sdk = "36"
 target-sdk = "36"
 jdk = "21"
