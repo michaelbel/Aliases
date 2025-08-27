@@ -87,7 +87,7 @@ jobs:
           THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
           MESSAGE: |
             ✅ *${{ env.VERSION_NAME }} (${{ env.VERSION_CODE }})*
-            *Repo:* https://github.com/${{ github.repository }}
+            *Repo:* [${{ github.repository }}](${{ github.server_url }}/${{ github.repository }})
             *Branch:* [${{ github.ref_name }}](${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }})
             *Commit:* [${{ env.SHORT_SHA }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
         run: |
