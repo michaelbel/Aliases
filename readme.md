@@ -1,5 +1,5 @@
 <div align="center">
-    <img src=".github/pics/cover.png" alt="Cover">
+    <img src=".github/cover.png" alt="Cover">
 </div>
 
 [![](https://img.shields.io/badge/Пост_в_Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/foundout/286)
@@ -15,4 +15,4 @@ Aliases
 
 Aliases – Android-приложение, реализующее возможность смены иконки приложения через механизм activity-alias. Это позволяет пользователям выбирать разные иконки, такие как стандартная, премиальная или праздничная.
 
-<img src=".github/pics/app.gif" alt="App Video" width="33%">
+<img src=".github/app.gif" alt="App Video" width="33%">

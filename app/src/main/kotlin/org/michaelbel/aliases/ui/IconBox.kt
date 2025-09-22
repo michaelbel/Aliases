@@ -54,7 +54,7 @@ fun IconBox(
     }
 }
 
-class IconAliasProvider: PreviewParameterProvider<LauncherIcon> {
+private class IconAliasProvider: PreviewParameterProvider<LauncherIcon> {
     override val values = sequenceOf(
         LauncherIcon.DEFAULT,
         LauncherIcon.PREMIUM,
