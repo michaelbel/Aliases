@@ -61,11 +61,11 @@ base {
 }
 
 dependencies {
-    api(libs.google.material)
-    api(libs.androidx.activity.compose)
-    api(libs.androidx.compose.material3)
-    api(libs.androidx.compose.ui.tooling)
-    api(libs.androidx.core.splashscreen)
+    implementation(libs.google.material)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.core.splashscreen)
 }
 
 tasks.register("printVersion") {
