@@ -3,9 +3,12 @@
 package org.michaelbel.aliases
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -32,17 +35,16 @@ fun MainActivityContent() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
-
     var enabledIcon by remember { mutableStateOf(context.enabledIcon) }
-
     val onChangeIcon: (LauncherIcon) -> Unit = { icon ->
+        enabledIcon = icon
+        context.setEnabled(icon)
+        snackbarHostState.currentSnackbarData?.dismiss()
         scope.launch {
-            enabledIcon = icon
-            context.setEnabled(icon)
-            snackbarHostState.run {
-                currentSnackbarData?.dismiss()
-                showSnackbar("Иконка изменена на ${icon.name}", duration = SnackbarDuration.Short)
-            }
+            snackbarHostState.showSnackbar(
+                message = "Иконка изменена на ${icon.name}",
+                duration = SnackbarDuration.Short
+            )
         }
     }
 
@@ -51,7 +53,7 @@ fun MainActivityContent() {
         topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
-        Row(
+        LazyRow(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp)
@@ -59,7 +61,9 @@ fun MainActivityContent() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            LauncherIcon.entries.forEach { icon ->
+            items(
+                items = LauncherIcon.entries
+            ) { icon ->
                 IconBox(
                     icon = icon,
                     isEnabled = icon == enabledIcon,
