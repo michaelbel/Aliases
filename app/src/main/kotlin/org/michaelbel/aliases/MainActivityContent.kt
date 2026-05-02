@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,12 +41,7 @@ fun MainActivityContent() {
         enabledIcon = icon
         context.setEnabled(icon)
         snackbarHostState.currentSnackbarData?.dismiss()
-        scope.launch {
-            snackbarHostState.showSnackbar(
-                message = "Иконка изменена на ${icon.name}",
-                duration = SnackbarDuration.Short
-            )
-        }
+        scope.launch { snackbarHostState.showSnackbar("Иконка изменена на ${icon.name}") }
     }
 
     Scaffold(
@@ -54,10 +50,8 @@ fun MainActivityContent() {
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
         LazyRow(
-            modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp)
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = innerPadding + PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
